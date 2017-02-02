@@ -7,9 +7,9 @@
  */
 package com.sqa.jf.helpers;
 
-import java.util.*;
+import java.util.Scanner;
 
-import com.sqa.jf.helpers.exceptions.*;
+import com.sqa.jf.helpers.exceptions.NumberNotInRangeException;
 
 /**
  * AppBasics //ADDD (description of class)
@@ -35,6 +35,13 @@ public class AppBasics {
 		System.out.println("Hello, Welcome to the " + nameOfApp + " App.");
 		System.out.print("Could I please get your name? ");
 		return scanner.nextLine();
+	}
+
+	public static String requestInfoFromUser(String question) {
+		String response;
+		System.out.print(question + " ");
+		response = scanner.nextLine();
+		return response;
 	}
 
 	public static int requestIntFromUser(String question) {
