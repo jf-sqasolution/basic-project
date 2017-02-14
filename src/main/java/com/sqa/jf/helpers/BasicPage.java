@@ -7,10 +7,9 @@
  */
 package com.sqa.jf.helpers;
 
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.apache.log4j.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
 
 /**
  * BasicPage //ADDD (description of class)
@@ -23,7 +22,7 @@ import org.openqa.selenium.support.PageFactory;
  * @version 1.0.0
  * @since 1.0
  */
-public class BasicPage {
+public class BasicPage extends Core {
 
 	private WebDriver driver;
 

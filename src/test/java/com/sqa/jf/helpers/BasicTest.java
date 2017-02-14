@@ -1,17 +1,16 @@
 package com.sqa.jf.helpers;
 
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
-import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.apache.log4j.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.firefox.*;
+import org.openqa.selenium.ie.*;
+import org.openqa.selenium.safari.*;
+import org.testng.annotations.*;
 
-public class BasicTest {
+public class BasicTest extends Core {
 
 	private String baseUrl;
 
@@ -34,11 +33,21 @@ public class BasicTest {
 		return this.driver;
 	}
 
+	@Override
+	public int getInt(String name) {
+		return AutoBasics.getInt(name);
+	}
+
 	public Logger getLog() {
 		return this.log;
 	}
 
-	@BeforeMethod
+	@Override
+	public String getProp(String name) {
+		return AutoBasics.getProp(name);
+	}
+
+	@BeforeMethod(groups = "chrome")
 	public void setupChrome() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		this.driver = new ChromeDriver();
@@ -46,15 +55,16 @@ public class BasicTest {
 		this.driver.get(this.baseUrl);
 	}
 
-	@BeforeMethod(enabled = false)
+	@BeforeMethod(groups = "firefox")
 	public void setupFirefox() {
 		this.driver = new FirefoxDriver();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		this.driver.get(this.baseUrl);
 	}
 
-	@BeforeMethod(enabled = false)
+	@BeforeMethod(groups = "ie")
 	public void setupIE() {
+		System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
 		this.driver = new InternetExplorerDriver();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		this.driver.get(this.baseUrl);
